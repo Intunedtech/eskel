@@ -34,6 +34,10 @@ npm run build
 ```
 
 ## Project structure
+:file_folder: .github
+- :file_folder: workflows
+  - :page_facing_up: [github-action.yml](.github/workflows/github-actions.yml):
+    - Handles actions or CI/CD pipeline for the repo. Used for automatically publishing the package to github package.
 
 :file_folder: lib/
 - :page_facing_up: main.ts
