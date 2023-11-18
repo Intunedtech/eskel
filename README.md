@@ -2,6 +2,21 @@
 
 Vite used in [library mode](https://vitejs.dev/guide/build.html#library-mode). Also checkout [lib](https://vitejs.dev/config/build-options.html#build-lib)
 
+## Project structure
+
+:file_folder: lib/
+- :page_facing_up: main.ts
+  - _Entrypoint for library when external applications are importing this library_
+- :page_facing_up: vite-env.d.ts
+  - _special vite file, copied from src, for correct typescript definition._
+
+:file_folder: public/
+
+:file_folder: src/
+
+:page_facing_up: tsconfig-build.json:
+- _Special tsconfig for production build. Configured within package.json > scripts > build. Extends `tsconfig.json`._
+
 ## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
