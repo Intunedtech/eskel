@@ -18,6 +18,13 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'lib/main.ts'),
       formats: ['es']
+    },
+
+    // Rollup config
+    rollupOptions: {
+      // externalize dependencies to remove the code from bundle.
+      //  as the app using this library is expected to have react already installed
+      external: ['react', 'react/jsx-runtime'],
     }
 
   }

@@ -17,6 +17,9 @@ Vite used in [library mode](https://vitejs.dev/guide/build.html#library-mode). A
 :page_facing_up: tsconfig-build.json:
 - _Special tsconfig for production build. Configured within package.json > scripts > build. Extends `tsconfig.json`._
 
+:page_facing_up: vite.config.ts:
+- _vite configuration file_
+
 ## Important packages:
 - :package: NPM: vite-plugin-dts
   - Support type definition while shipping library
