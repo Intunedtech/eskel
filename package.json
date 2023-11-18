@@ -1,6 +1,5 @@
 {
-  "name": "eskel-component-library",
-  "private": true,
+  "name": "@intunedtech/eskel-component-library",
   "version": "0.0.0",
   "type": "module",
   "main": "dist/main.js",
@@ -14,6 +13,13 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:intunedtech/eskel.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/intunedtech"
   },
   "peerDependencies": {
     "react": "^18.2.0",
