@@ -17,6 +17,13 @@ Vite used in [library mode](https://vitejs.dev/guide/build.html#library-mode). A
 :page_facing_up: tsconfig-build.json:
 - _Special tsconfig for production build. Configured within package.json > scripts > build. Extends `tsconfig.json`._
 
+## Important packages:
+- :package: NPM: vite-plugin-dts
+  - Support type definition while shipping library
+  - Enabled by adding entry to `vite.config.js` > plugins
+    - `import dts from 'vite-plugin-dts'; ...`
+    - `dts({ include: ['lib'] })`
+
 ## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
