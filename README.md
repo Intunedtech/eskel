@@ -1,4 +1,8 @@
-# React + TypeScript + Vite
+# Eskel Library
+
+Vite used in [library mode](https://vitejs.dev/guide/build.html#library-mode). Also checkout [lib](https://vitejs.dev/config/build-options.html#build-lib)
+
+## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
@@ -28,6 +32,8 @@ export default {
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+
 
 ## Reference
 [Source 1](https://dev.to/receter/how-to-create-a-react-component-library-using-vites-library-mode-4lma)
