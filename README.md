@@ -20,6 +20,20 @@ Vite used in [library mode](https://vitejs.dev/guide/build.html#library-mode). A
 :page_facing_up: vite.config.ts:
 - _vite configuration file_
 
+:page_facing_up: package.json:
+  - "sideEffects":
+    - To prevent the CSS files from being accidentally removed by the consumer's tree-shaking efforts, package.json specifies the generated CSS as side effects:
+  - "peerDependencies":
+    - special dependency to specify the consuming application must have these packages installed to use this package.
+  - "files":
+    - files to be packed into the distributed package
+  - "main":
+    - main entrypoint to library
+  - "types":
+    - types entrypoint, required by consuming application if used within typescript project.
+  - "scripts":
+    - "prepublishOnly": 
+      - special lifecycle script to guarantee that the changes are always built before the package is published.
 ## Important packages:
 - :package: NPM: vite-plugin-dts
   - Support type definition while shipping library
