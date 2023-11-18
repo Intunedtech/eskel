@@ -26,6 +26,14 @@ Vite used in [library mode](https://vitejs.dev/guide/build.html#library-mode). A
   - Enabled by adding entry to `vite.config.js` > plugins
     - `import dts from 'vite-plugin-dts'; ...`
     - `dts({ include: ['lib'] })`
+- :package: NPM: vite-plugin-lib-inject-css
+  - Supports injecting css module style by using import statement within eskel-component-library.js
+
+## Tips
+
+### CSS Modules
+
+Vite supports CSS modules by default.
 
 ## React + TypeScript + Vite
 
