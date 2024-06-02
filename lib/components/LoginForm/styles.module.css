@@ -1,0 +1,12 @@
+.login-form-wrapper{
+    
+}
+
+.login-form-wrapper.layout-vertical{
+    display: flex;
+    flex-direction: column;
+}
+.login-form-wrapper.layout-horizontal{
+    display: flex;
+    flex-direction: row;
+}

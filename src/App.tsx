@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { Button, Label, Input } from '../';
+import { LoginForm } from '../lib/components/LoginForm';
 
 function App() {
   const handleClick = () => {
@@ -51,6 +52,18 @@ function App() {
                   title='eskel-input'
                   onBlur={() => { alert("Input blur triggered") }}
                   placeholder='Write something'
+                />
+              </td>
+              <td>component 2</td>
+            </tr>
+
+            <tr>
+              <td>
+                <p>Login Form</p>
+                <LoginForm 
+                  userLabel='Email'
+                  passwordLabel='Password'
+                  layout='vertical'
                 />
               </td>
               <td>component 2</td>
