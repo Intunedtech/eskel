@@ -11,6 +11,18 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+// Following code is equivalent to
+//  <Card title='My Card' body='This is body copy' footer='This is footer' />
 export const Default: Story = {
+    argTypes: {
+        title: {control: 'text'},
+        body: {control: 'text'},
+        footer: {control: 'text'},
+        backgroundColor: { control: 'color' },
+    },
+    args: {
+        title: 'My Card',
+        body: 'This is a body copy',
+        footer: 'This is footer',
+    }
 };
