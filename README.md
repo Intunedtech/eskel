@@ -124,3 +124,4 @@ Vite supports CSS modules by default.
 
 ## Reference
 [Source 1](https://dev.to/receter/how-to-create-a-react-component-library-using-vites-library-mode-4lma)
+[Source 2 - Storybook setup](https://the-teacher.medium.com/story-book-installing-to-an-existing-project-e85eedec9098)
