@@ -3,7 +3,12 @@
     color: #000;
     border: 1px solid #000;
 }
-
+.defaultButton:disabled{
+    color: #cdcdcd;
+    border: 1px solid #bbb;
+}
 .fullWidth {
     width: 100%;
 }
+
+  
