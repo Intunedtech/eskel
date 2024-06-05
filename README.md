@@ -34,6 +34,10 @@ npm run build
 ```
 
 ## Project structure
+:file_folder: .github
+- :file_folder: workflows
+  - :page_facing_up: [github-action.yml](.github/workflows/github-actions.yml):
+    - Handles actions or CI/CD pipeline for the repo. Used for automatically publishing the package to github package.
 
 :file_folder: lib/
 - :page_facing_up: main.ts
@@ -120,3 +124,4 @@ Vite supports CSS modules by default.
 
 ## Reference
 [Source 1](https://dev.to/receter/how-to-create-a-react-component-library-using-vites-library-mode-4lma)
+[Source 2 - Storybook setup](https://the-teacher.medium.com/story-book-installing-to-an-existing-project-e85eedec9098)
