@@ -10,6 +10,7 @@ interface TimeLeft {
 
 export interface CountdownTimerProps {
     endTimestamp: string;
+    message: string;
 }
 
 //Target time
@@ -27,7 +28,7 @@ const getTimeLeft = (endtime: Date): TimeLeft => {
 
 const CountdownTimer = (props: CountdownTimerProps) => {
     //Setup timer to change state every second
-    const { endTimestamp } = props;
+    const { endTimestamp, message } = props;
     const [endtimeMessage, setEndtimeMessage] = useState(false);
     // console.log("End timestamp",endTimestamp);
     const [timeLeft, setTimeLeft] = useState(() => getTimeLeft( new Date(endTimestamp) ));
@@ -47,7 +48,7 @@ const CountdownTimer = (props: CountdownTimerProps) => {
     }, []);
     return (
         <>
-            {endtimeMessage ? (<h2>Countdown Ended!</h2>) : (
+            {endtimeMessage ? (<h2>{message}</h2>) : (
                 <div>
                     <h2 className={styles.h2}>Countdown</h2>
                     <div className={styles.content}>
