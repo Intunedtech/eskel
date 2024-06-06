@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-
 import styles from './styles.module.css';
+
 interface TimeLeft {
     days: number;
     hours: number;
@@ -8,12 +8,16 @@ interface TimeLeft {
     seconds: number;
 }
 
+export interface CountdownTimerProps {
+    endTimestamp: string;
+}
+
 //Target time
-const COUNTDOWN_TARGET = new Date("2024-12-06T20:00:00");
+// const COUNTDOWN_TARGET = new Date("2024-12-06T20:00:00");
 
 //Time remaining
-const getTimeLeft = (): TimeLeft => {
-    const totalTimeLeft = COUNTDOWN_TARGET.getTime() - new Date().getTime();
+const getTimeLeft = (endtime: Date): TimeLeft => {
+    const totalTimeLeft = endtime.getTime() - new Date().getTime();
     const days = Math.floor(totalTimeLeft / (1000 * 60 * 60 * 24));
     const hours = Math.floor((totalTimeLeft / (1000 * 60 * 60)) % 24);
     const minutes = Math.floor((totalTimeLeft / (1000 * 60)) % 60);
@@ -21,13 +25,15 @@ const getTimeLeft = (): TimeLeft => {
     return { days, hours, minutes, seconds };
 };
 
-const CountdownTimer = () => {
+const CountdownTimer = (props: CountdownTimerProps) => {
     //Setup timer to change state every second
-    const [timeLeft, setTimeLeft] = useState(() => getTimeLeft());
+    const { endTimestamp } = props;
+    // console.log("End timestamp",endTimestamp);
+    const [timeLeft, setTimeLeft] = useState(() => getTimeLeft( new Date(endTimestamp) ));
 
     useEffect(() => {
         const timer = setInterval(() => {
-            setTimeLeft(getTimeLeft());
+            setTimeLeft( getTimeLeft( new Date(endTimestamp) ));
         }, 1000);
 
         return () => {

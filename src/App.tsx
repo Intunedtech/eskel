@@ -73,7 +73,7 @@ function App() {
         </table>
         
        <div>
-       <CountdownTimer />
+       <CountdownTimer endTimestamp='2024-06-10T20:00:00' />
        </div>
          
       </div>
