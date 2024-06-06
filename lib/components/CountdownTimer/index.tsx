@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 interface TimeLeft {
@@ -20,37 +21,37 @@ const getTimeLeft = (): TimeLeft => {
     return { days, hours, minutes, seconds };
 };
 
-
 const CountdownTimer = () => {
+    //Setup timer to change state every second
+    const [timeLeft, setTimeLeft] = useState(() => getTimeLeft());
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setTimeLeft(getTimeLeft());
+        }, 1000);
+
+        return () => {
+            clearInterval(timer);
+        };
+    }, []);
     return (
         <>
             <div>
-                <h2>Countdown</h2>
+                <h2 className={styles.h2}>Countdown</h2>
                 <div className={styles.content}>
-                    <div className={styles.box}>
-                        <div className={styles.value}>
-                            <span>30</span>
-                        </div>
-                        <span className={styles.label}>days</span>
-                    </div>
-                    <div className={styles.box}>
-                        <div className={styles.value}>
-                            <span>10</span>
-                        </div>
-                        <span className={styles.label}>hours</span>
-                    </div>
-                    <div className={styles.box}>
-                        <div className={styles.value}>
-                            <span>10</span>
-                        </div>
-                        <span className={styles.label}>minutes</span>
-                    </div>
-                    <div className={styles.box}>
-                        <div className={styles.value}>
-                            <span>10</span>
-                        </div>
-                        <span className={styles.label}>seconds</span>
-                    </div>
+                    {Object.entries(timeLeft).map(el => {
+                        const label = el[0];
+                        const value = el[1];
+                        return (
+                            <div className={styles.box} key={`label-${label}`}>
+                                <div className={styles.value}>
+                                    <span>{value}</span>
+                                </div>
+                                <span className={styles.label}>{label}</span>
+                            </div>
+                        )
+                    })}
+                    
                 </div>
                 
             </div>

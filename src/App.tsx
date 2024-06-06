@@ -72,9 +72,10 @@ function App() {
           </tbody>
         </table>
         
-        <p>
-          <CountdownTimer />
-        </p>
+       <div>
+       <CountdownTimer />
+       </div>
+         
       </div>
     </>
   )
