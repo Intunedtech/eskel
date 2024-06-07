@@ -10,7 +10,7 @@ interface TimeLeft {
 
 export interface CountdownTimerProps {
     endTimestamp: string;
-    message?: string;
+    message: string;
 }
 
 //Target time
@@ -26,29 +26,58 @@ const getTimeLeft = (endtime: Date): TimeLeft => {
     return { days, hours, minutes, seconds };
 };
 
+/**
+ * Standalong function that checks whether the passed comparisionTimestamp has expired
+ * @param comparisionTimestamp 
+ * @returns 
+ */
+const isTimeExpired = (comparisionTimestamp:string) => {
+    const now = new Date();
+    const comparisionTimestampObj = new Date(comparisionTimestamp);
+    
+    if(comparisionTimestampObj < now){
+        return true;
+    }
+
+    return false;
+}
+
 export const CountdownTimer = (props: CountdownTimerProps) => {
     //Setup timer to change state every second
     const { endTimestamp, message } = props;
-    const [endtimeMessage, setEndtimeMessage] = useState(false);
+    const [ timeExpired, setTimeExpired] = useState(false);
     // console.log("End timestamp",endTimestamp);
     const [timeLeft, setTimeLeft] = useState(() => getTimeLeft( new Date(endTimestamp) ));
 
     useEffect(() => {
-        const timer = setInterval(() => {
-            setTimeLeft( getTimeLeft( new Date(endTimestamp) ));
-            if(timeLeft.days <= 0 && timeLeft.hours <= 0 && timeLeft.minutes <= 0 && timeLeft.seconds <= 0) {
-                setEndtimeMessage(true);
-            }
-        }, 1000);
 
-        return () => {
-            console.log("reached here");
-            clearInterval(timer);
-        };
+        if(!isTimeExpired(endTimestamp)){
+
+            const timer = setInterval(() => {
+                setTimeLeft( getTimeLeft( new Date(endTimestamp) ));
+                
+                if(isTimeExpired(endTimestamp)){
+                    setTimeExpired(true);
+                    // clearInterval(timer);
+                }
+
+            }, 1000);
+    
+            return () => {
+                console.log("Clean up reached");
+                clearInterval(timer);
+            };
+            
+        }
+        else{
+            setTimeExpired(true);
+        }
+        
+        
     }, []);
     return (
         <>
-            {endtimeMessage ? (<h2>{message}</h2>) : (
+            {timeExpired ? (<h2>{message}</h2>) : (
                 <div>
                     <div className={styles.content}>
                         {Object.entries(timeLeft).map(el => {

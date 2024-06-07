@@ -17,6 +17,7 @@ function getTimestampOneDayAhead(): string {
 
   // Add one day to the current date
   const oneDayAhead = new Date(currentDate.getTime() + 24 * 60 * 60 * 1000);
+  // const oneDayAhead = new Date(currentDate.getTime() + 1 * 1 * 10 * 1000);
 
   // Get the components of the date
   const year = oneDayAhead.getFullYear();
@@ -37,5 +38,6 @@ export const Default: Story = {
     },
     args: {
       endTimestamp: getTimestampOneDayAhead(),
+      message: "Countdown has ended"
     }
 };

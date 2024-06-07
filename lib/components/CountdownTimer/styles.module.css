@@ -1,6 +1,6 @@
 .content {
-    width: 100%;
-	display: flex;
+    /* width: 100%; */
+	display: inline-flex;
 	flex-direction: row;
 	justify-content: center;
 	margin: auto;

@@ -73,7 +73,7 @@ function App() {
         </table>
         
        <div>
-       <CountdownTimer endTimestamp='2024-06-07T11:54:00' message='Countdown ends here' />
+        <CountdownTimer endTimestamp='2024-06-07T12:49:00' message='Countdown has ended' />
        </div>
          
       </div>
