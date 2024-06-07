@@ -10,7 +10,7 @@ interface TimeLeft {
 
 export interface CountdownTimerProps {
     endTimestamp: string;
-    message: string;
+    message?: string;
 }
 
 //Target time
@@ -26,7 +26,7 @@ const getTimeLeft = (endtime: Date): TimeLeft => {
     return { days, hours, minutes, seconds };
 };
 
-const CountdownTimer = (props: CountdownTimerProps) => {
+export const CountdownTimer = (props: CountdownTimerProps) => {
     //Setup timer to change state every second
     const { endTimestamp, message } = props;
     const [endtimeMessage, setEndtimeMessage] = useState(false);
@@ -50,7 +50,6 @@ const CountdownTimer = (props: CountdownTimerProps) => {
         <>
             {endtimeMessage ? (<h2>{message}</h2>) : (
                 <div>
-                    <h2 className={styles.h2}>Countdown</h2>
                     <div className={styles.content}>
                         {Object.entries(timeLeft).map(el => {
                             const label = el[0];
@@ -73,5 +72,3 @@ const CountdownTimer = (props: CountdownTimerProps) => {
         </>
     )
 }
-
-export default CountdownTimer
