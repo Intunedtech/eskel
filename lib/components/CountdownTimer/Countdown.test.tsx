@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import {CountdownTimer} from './index'
+import {CountdownTimer, getTimeLeft} from './index'
 
 /**
  * Returns timestamp that is 1 day before now
@@ -40,7 +40,26 @@ test('CountdownTimer shows end message if expired', () => {
 
     // Act
     // Nothing to act
-    
+
     // Assert
     expect(screen.getByRole('heading', { level: 2, name: defaultEndMessage })).toBeDefined()
+})
+
+/**
+ * Check getTimeLeft function
+ */
+test.each([
+    [new Date("2024-12-06T20:00:00"),new Date("2024-12-05T20:00:00"),{days: 1, hours: 0, minutes: 0, seconds: 0}],
+    [new Date("2024-12-05T23:59:59"),new Date("2024-12-05T20:00:00"),{days: 0, hours: 3, minutes: 59, seconds: 59}],
+    [new Date("2024-12-05T23:15:00"),new Date("2024-12-05T20:00:00"),{days: 0, hours: 3, minutes: 15, seconds: 0}],
+])('Check getTimeLeft function', (targetEndTime,comparisonTime,output) => {
+
+    // Arrange
+    const timeLeft = getTimeLeft(targetEndTime,comparisonTime);
+
+    // Act
+    // Nothing to act
+    
+    // Assert
+    expect(timeLeft).toStrictEqual(output);
 })

@@ -17,8 +17,8 @@ export interface CountdownTimerProps {
 // const COUNTDOWN_TARGET = new Date("2024-12-06T20:00:00");
 
 //Time remaining
-const getTimeLeft = (endtime: Date): TimeLeft => {
-    const totalTimeLeft = endtime.getTime() - new Date().getTime();
+export const getTimeLeft = (endtime: Date, comparisonTime:Date ): TimeLeft => {
+    const totalTimeLeft = endtime.getTime() - comparisonTime.getTime();
     const days = Math.floor(totalTimeLeft / (1000 * 60 * 60 * 24));
     const hours = Math.floor((totalTimeLeft / (1000 * 60 * 60)) % 24);
     const minutes = Math.floor((totalTimeLeft / (1000 * 60)) % 60);
@@ -47,14 +47,14 @@ export const CountdownTimer = (props: CountdownTimerProps) => {
     const { endTimestamp, message } = props;
     const [ timeExpired, setTimeExpired] = useState(false);
     // console.log("End timestamp",endTimestamp);
-    const [timeLeft, setTimeLeft] = useState(() => getTimeLeft( new Date(endTimestamp) ));
+    const [timeLeft, setTimeLeft] = useState(() => getTimeLeft( new Date(endTimestamp), new Date() ));
 
     useEffect(() => {
 
         if(!isTimeExpired(endTimestamp)){
 
             const timer = setInterval(() => {
-                setTimeLeft( getTimeLeft( new Date(endTimestamp) ));
+                setTimeLeft( getTimeLeft( new Date(endTimestamp), new Date() ));
                 
                 if(isTimeExpired(endTimestamp)){
                     setTimeExpired(true);
