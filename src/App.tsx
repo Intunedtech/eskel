@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { Button, Label, Input } from '../';
 import { LoginForm } from '../lib/components/LoginForm';
+import {CountdownTimer} from '../lib/components/CountdownTimer';
 
 function App() {
   const handleClick = () => {
@@ -71,9 +72,10 @@ function App() {
           </tbody>
         </table>
         
-        <p>
-          
-        </p>
+       <div>
+        <CountdownTimer endTimestamp='2024-06-07T12:49:00' message='Countdown has ended' />
+       </div>
+         
       </div>
     </>
   )

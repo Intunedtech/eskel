@@ -1,0 +1,38 @@
+.content {
+    /* width: 100%; */
+	display: inline-flex;
+	flex-direction: row;
+	justify-content: center;
+	margin: auto;
+	gap: 12px;
+}
+
+.h2 {
+	margin-bottom: 20px;
+	font-size: 50px;
+}
+
+.box {
+	width: calc(100% / 4);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 150px;
+	max-width: 150px;
+}
+
+.value {
+	font-size: 30px;
+	font-weight: 600;
+	background-color: #144b40;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 8px;
+	width: 80px;
+	height: 80px;
+	position: relative;
+	box-shadow: -2px 0px 5px 1px #232423ad;
+}
