@@ -30,16 +30,17 @@ export const getTimestampYesterday = (): string => {
 
 test('CountdownTimer shows end message if expired', () => {
 
-    // Assign
+    // Arrange
     const endTimestamp=getTimestampYesterday();
     const defaultEndMessage='Countdown has ended';
-    
-    // 
     render(<CountdownTimer 
         endTimestamp={endTimestamp} 
         message={defaultEndMessage}
     />);
 
-    // Test
+    // Act
+    // Nothing to act
+    
+    // Assert
     expect(screen.getByRole('heading', { level: 2, name: defaultEndMessage })).toBeDefined()
 })
