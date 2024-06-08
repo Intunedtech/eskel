@@ -75,8 +75,7 @@ export const CountdownTimer = (props: CountdownTimerProps) => {
         
         
     }, []);
-    return (
-        <>
+    return (<>
             {timeExpired ? (<h2>{message}</h2>) : (
                 <div>
                     <div className={styles.content}>
@@ -98,6 +97,5 @@ export const CountdownTimer = (props: CountdownTimerProps) => {
                 </div>
             )}
             
-        </>
-    )
+    </>)
 }
