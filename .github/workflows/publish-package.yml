@@ -1,5 +1,5 @@
-name: Publish Eskel
-run-name: ${{ github.actor }} is publishing Eskel NPM package to registry 🚀
+name: Publish Package
+run-name: ${{ github.actor }} is publishing NPM package to registry 🚀
 on: [push]
 
 env:
@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: node:${{ env.NODE_VERSION }}
+      image: node:$NODE_VERSION
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -17,7 +17,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: ${{ env.NODE_VERSION }}
+        node-version: $NODE_VERSION
 
     - name: Install dependencies
       run: npm install
