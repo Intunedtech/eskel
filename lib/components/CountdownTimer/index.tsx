@@ -29,16 +29,16 @@ export const getTimeLeft = (endtime: Date, comparisonTime:Date ): TimeLeft => {
 /**
  * Standalong function that checks whether the passed targetTimestamp 
  *  has expired in relation to comparisionTimestamp
- * @param {string} targetTimestamp
- * @param {string} comparisionTimestamp 
+ * @param {Date} targetTimestamp
+ * @param {Date} comparisionTimestamp 
  * @returns {boolean}
  */
 
-export const isTimeExpired = (targetTimestamp:string, comparisionTimestamp:Date) => {
+export const isTimeExpired = (targetTimestamp:Date, comparisionTimestamp:Date):boolean => {
 
-    const targetTimestampObj = new Date(targetTimestamp);
+    // const targetTimestampObj = new Date(targetTimestamp);
     
-    if(targetTimestampObj <= comparisionTimestamp){
+    if(targetTimestamp <= comparisionTimestamp){
         return true;
     }
 
@@ -54,12 +54,12 @@ export const CountdownTimer = (props: CountdownTimerProps) => {
 
     useEffect(() => {
 
-        if(!isTimeExpired(endTimestamp, new Date())){
+        if(!isTimeExpired(new Date(endTimestamp), new Date())){
 
             const timer = setInterval(() => {
                 setTimeLeft( getTimeLeft( new Date(endTimestamp), new Date() ));
                 
-                if(isTimeExpired(endTimestamp,new Date())){
+                if(isTimeExpired(new Date(endTimestamp),new Date())){
                     setTimeExpired(true);
                     // clearInterval(timer);
                 }

@@ -68,9 +68,9 @@ test.each([
  * Check isTimeExpired function
  */
 test.each([
-    ['2024-06-10T12:49:00',new Date('2024-08-10T12:49:00'),true],
-    ['2024-06-07T12:49:00',new Date('2024-05-10T12:49:00'),false],
-    ['2024-06-07T12:49:00',new Date('2024-06-07T12:49:00'),true],
+    [new Date('2024-06-10T12:49:00'),new Date('2024-08-10T12:49:00'),true],
+    [new Date('2024-06-07T12:49:00'),new Date('2024-05-10T12:49:00'),false],
+    [new Date('2024-06-07T12:49:00'),new Date('2024-06-07T12:49:00'),true],
 ])('Check isTimeExpired function', (targetTimestamp,comparisionTimestamp,output) => {
 
     // Arrange
