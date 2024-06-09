@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is publishing NPM package to registry 🚀
 on: [push]
 
 env:
-  NODE_VERSION: 20  # Define the Node.js version as a workflow-level environment variable
+  NODE_VERSION: 18  # Define the Node.js version as a workflow-level environment variable
 
 jobs:
   build:
@@ -11,6 +11,7 @@ jobs:
     container:
       image: node:$NODE_VERSION
     steps:
+    - run: echo "Node version:" $NODE_VERSOPM
     - name: Checkout repository
       uses: actions/checkout@v2
 
