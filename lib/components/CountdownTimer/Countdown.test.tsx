@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import {CountdownTimer, getTimeLeft} from './index'
+import {CountdownTimer, getTimeLeft, isTimeExpired} from './index'
 
 /**
  * Returns timestamp that is 1 day before now
@@ -62,4 +62,23 @@ test.each([
     
     // Assert
     expect(timeLeft).toStrictEqual(output);
+})
+
+/**
+ * Check isTimeExpired function
+ */
+test.each([
+    ['2024-06-10T12:49:00',new Date('2024-08-10T12:49:00'),true],
+    ['2024-06-07T12:49:00',new Date('2024-05-10T12:49:00'),false],
+    ['2024-06-07T12:49:00',new Date('2024-06-07T12:49:00'),true],
+])('Check isTimeExpired function', (targetTimestamp,comparisionTimestamp,output) => {
+
+    // Arrange
+    const timeExpired = isTimeExpired(targetTimestamp,comparisionTimestamp);
+
+    // Act
+    // Nothing to act
+    
+    // Assert
+    expect(timeExpired).toStrictEqual(output);
 })
