@@ -1,0 +1,9 @@
+name: Publish Eskel
+run-name: ${{ github.actor }} is publishing Eskel NPM package to registry 🚀
+on: [push]
+jobs:
+  Prep:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "List folder"
+      - run: ls -lah
