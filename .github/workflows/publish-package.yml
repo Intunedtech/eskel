@@ -1,6 +1,9 @@
 name: Publish Package
 run-name: ${{ github.actor }} is publishing to Github Package Registry (GPR) 🚀
-on: [push]
+# on: [push]
+on:
+  release:
+    types: [created]
 
 jobs:
   build:
