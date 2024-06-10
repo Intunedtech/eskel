@@ -2,27 +2,22 @@ name: Publish Package
 run-name: ${{ github.actor }} is publishing NPM package to registry 🚀
 on: [push]
 
-env:
-  NODE_VERSION: '20'  # Define the Node.js version as a workflow-level environment variable
-
 jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: node:${{env.NODE_VERSION}}
+      image: node:20
     steps:
-    - run: echo "Node version:" ${{env.NODE_VERSION}}
-    - run: npm -v
-    # - name: Checkout repository
-    #   uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
     # - name: Set up Node.js
     #   uses: actions/setup-node@v2
     #   with:
     #     node-version: '20'
 
-    # - name: Install dependencies
-    #   run: npm install
+    - name: Install dependencies
+      run: npm install
 
-    # - name: Run tests
-    #   run: npm test
+    - name: Run tests
+      run: npm test
