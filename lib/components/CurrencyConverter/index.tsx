@@ -3,27 +3,27 @@ import { useState, useEffect } from 'react';
 const CurrencyConverter = () => {
     const [inputValue, setInputValue] = useState("");
     const [inputValue2, setInputValue2] = useState("");
-    const exchangeRate = 1.6;
-
-    // useEffect(() => {
-    //     fetch('https://open.er-api.com/v6/latest/USD')
-    //       .then((res) => {
-    //         return res.json();
-    //       })
-    //       .then((data) => {
-            
-            
-    //         console.log("Currency data: ",data.rates);
-    //       });
-    //   }, []);
+    const [exchangeRate, setExchangeRate] = useState<Number>(1);
 
     useEffect(() => {
-        const calculation = Number(inputValue) * exchangeRate
+        fetch('https://open.er-api.com/v6/latest/USD')
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            
+            setExchangeRate(data.rates.NPR);
+            console.log("Currency data: ",data.rates.NPR);
+          });
+      }, []);
+
+    useEffect(() => {
+        const calculation = Number(inputValue) * Number(exchangeRate)
         setInputValue2(String(calculation))
     }, [inputValue]);
 
     useEffect(() => {
-        const calculation2 = Number(inputValue2) / exchangeRate
+        const calculation2 = Number(inputValue2) / Number(exchangeRate)
         setInputValue(String(calculation2))
     }, [inputValue2]);
 
