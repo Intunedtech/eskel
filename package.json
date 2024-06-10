@@ -15,7 +15,11 @@
     "prepublishOnly": "npm run build",
     "storybook:dev": "storybook dev -p 6006",
     "storybook:prod": "storybook build",
-    "test": "vitest"
+    "test": "vitest",
+    "preversion": "npm run test",
+    "bump:major": "npm version major",
+    "bump:minor": "npm version minor",
+    "bump:patch": "npm version patch"
   },
   "repository": {
     "type": "git",
