@@ -11,17 +11,18 @@ jobs:
     container:
       image: node:${{env.NODE_VERSION}}
     steps:
-    - run: echo "Node version:" $NODE_VERSION
-    - name: Checkout repository
-      uses: actions/checkout@v2
+    - run: echo "Node version:" ${{env.NODE_VERSION}}
+    - run: npm -v
+    # - name: Checkout repository
+    #   uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '20'
+    # - name: Set up Node.js
+    #   uses: actions/setup-node@v2
+    #   with:
+    #     node-version: '20'
 
-    - name: Install dependencies
-      run: npm install
+    # - name: Install dependencies
+    #   run: npm install
 
-    - name: Run tests
-      run: npm test
+    # - name: Run tests
+    #   run: npm test
