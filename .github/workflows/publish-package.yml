@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is publishing NPM package to registry 🚀
 on: [push]
 
 env:
-  NODE_VERSION: 20  # Define the Node.js version as a workflow-level environment variable
+  NODE_VERSION: '20'  # Define the Node.js version as a workflow-level environment variable
 
 jobs:
   build:
@@ -18,7 +18,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: 20
+        node-version: '20'
 
     - name: Install dependencies
       run: npm install
