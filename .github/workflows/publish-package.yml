@@ -1,23 +1,42 @@
 name: Publish Package
-run-name: ${{ github.actor }} is publishing NPM package to registry 🚀
+run-name: ${{ github.actor }} is publishing to Github Package Registry (GPR) 🚀
 on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: node:20
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
-    # - name: Set up Node.js
-    #   uses: actions/setup-node@v2
-    #   with:
-    #     node-version: '20'
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
 
     - name: Install dependencies
       run: npm install
 
     - name: Run tests
       run: npm test
+
+  # publish to gpr
+  publish-gpr:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: https://npm.pkg.github.com/
+          scope: '@intunedtech'
+      - run: npm install
+      - run: echo registry=https://npm.pkg.github.com/intunedtech >> .npmrc
+      - run: npm run build
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.PUBLISH_GITHUB_TOKEN}}
