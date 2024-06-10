@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: node:20
+      image: node:$NODE_VERSION
     steps:
     - run: echo "Node version:" $NODE_VERSION
     - name: Checkout repository
