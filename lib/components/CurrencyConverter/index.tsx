@@ -1,31 +1,64 @@
 import { useState, useEffect } from 'react';
 
+interface ExchangeRates {
+    [key: string]: number;
+}
+
 const CurrencyConverter = () => {
-    const [inputValue, setInputValue] = useState("");
-    const [inputValue2, setInputValue2] = useState("");
+    const [sendInputValue, setSendInputValue] = useState("");
+    const [receiveInputValue, setReceiveInputValue] = useState("");
     const [exchangeRate, setExchangeRate] = useState<Number>(1);
+    const [countrySelectVal, setCountrySelectVal] = useState("");
+    const [countryNames, setCountryNames] = useState<string[]>([]);
 
+    // Fetch the list of available currencies
     useEffect(() => {
+        
         fetch('https://open.er-api.com/v6/latest/USD')
-          .then((res) => {
-            return res.json();
-          })
-          .then((data) => {
-            
-            setExchangeRate(data.rates.NPR);
-            console.log("Currency data: ",data.rates.NPR);
-          });
-      }, []);
+            .then((res) => res.json())
+            .then((data) => {
+                const currencyCodes = Object.keys(data.rates);
+                setCountryNames(currencyCodes);
+                
+                if (currencyCodes.length > 0) {
+                    setCountrySelectVal(currencyCodes[0]);
+                }
+            })
+            .catch((error) => console.error('Error fetching currency codes:', error));
+    }, []);
 
+    // Fetch the exchange rate whenever the selected country changes
     useEffect(() => {
-        const calculation = Number(inputValue) * Number(exchangeRate)
-        setInputValue2(String(calculation))
-    }, [inputValue]);
+        if (countrySelectVal) {
+            fetch(`https://open.er-api.com/v6/latest/USD`)
+                .then((res) => res.json())
+                .then((data) => {
+                    const rates: ExchangeRates = data.rates;
+                    console.log("Rates: ", rates);
+                    if (rates[countrySelectVal]) {
+                        setExchangeRate(rates[countrySelectVal]);
+                        console.log(`Currency data for ${countrySelectVal}: `, rates[countrySelectVal]);
+                    }
+                })
+                .catch((error) => console.error('Error fetching exchange rate:', error));
+        }
+    }, [countrySelectVal]);
 
+    // Update receiveInputValue when sendInputValue or exchangeRate changes
     useEffect(() => {
-        const calculation2 = Number(inputValue2) / Number(exchangeRate)
-        setInputValue(String(calculation2))
-    }, [inputValue2]);
+        if (sendInputValue) {
+            const receiveCalculation = Number(sendInputValue) * Number(exchangeRate);
+            setReceiveInputValue(receiveCalculation.toString());
+        }
+    }, [sendInputValue, exchangeRate]);
+
+    // Update sendInputValue when receiveInputValue or exchangeRate changes
+    useEffect(() => {
+        if (receiveInputValue) {
+            const sendCalculation = Number(receiveInputValue) / Number(exchangeRate);
+            setSendInputValue(sendCalculation.toString());
+        }
+    }, [receiveInputValue, exchangeRate]);
 
   return (
     <>
@@ -35,8 +68,8 @@ const CurrencyConverter = () => {
                     Send:
                     <input
                     type="number"
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
+                    value={sendInputValue}
+                    onChange={(e) => setSendInputValue(e.target.value)}
                     />
                 </label>
             </div>
@@ -45,10 +78,15 @@ const CurrencyConverter = () => {
                     Receive:
                     <input
                     type="number"
-                    value={inputValue2}
-                    onChange={(e) => setInputValue2(e.target.value)}
+                    value={receiveInputValue}
+                    onChange={(e) => setReceiveInputValue(e.target.value)}
                     />
                 </label>
+                <select name="country" value={countrySelectVal} onChange={(e) => setCountrySelectVal(e.target.value)}>
+                    {
+                        countryNames.map(countryName => <option key={countryName}>{countryName}</option>)
+                    }
+                </select>
             </div>
             
         </form>
