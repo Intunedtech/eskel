@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import styles from './styles.module.css';
 
 interface ExchangeRates {
     [key: string]: number;
@@ -10,7 +11,8 @@ const CurrencyConverter = () => {
     const [exchangeRate, setExchangeRate] = useState<Number>(1);
     const [countrySelectVal, setCountrySelectVal] = useState("");
     const [countryNames, setCountryNames] = useState<string[]>([]);
-
+    const prevExchangeRateRef = useRef<number>(1);
+    const [isUpdating,setIsUpdating] = useState<boolean>(false);
     // Fetch the list of available currencies
     useEffect(() => {
         
@@ -46,24 +48,23 @@ const CurrencyConverter = () => {
 
     // Update receiveInputValue when sendInputValue or exchangeRate changes
     useEffect(() => {
-        if (sendInputValue) {
-            const receiveCalculation = Number(sendInputValue) * Number(exchangeRate);
-            setReceiveInputValue(receiveCalculation.toString());
-        }
-    }, [sendInputValue, exchangeRate]);
-
-    // Update sendInputValue when receiveInputValue or exchangeRate changes
-    useEffect(() => {
-        if (receiveInputValue) {
-            const sendCalculation = Number(receiveInputValue) / Number(exchangeRate);
-            setSendInputValue(sendCalculation.toString());
-        }
-    }, [receiveInputValue, exchangeRate]);
+        
+            if(!isUpdating){
+                setIsUpdating(true);
+                const receiveCalculation = (Number(sendInputValue) * Number(exchangeRate)).toFixed(2);
+                setReceiveInputValue(receiveCalculation.toString());
+            }
+            
+            return () => {
+                setIsUpdating(false);
+            }
+       
+    }, [receiveInputValue, sendInputValue, exchangeRate]);
 
   return (
     <>
-        <form>
-            <div>
+        <form className={styles.form}>
+            <div className={styles.form_input}>
                 <label>
                     Send:
                     <input
