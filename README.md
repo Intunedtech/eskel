@@ -31,6 +31,10 @@ npm run dev
 # Build the library for distribution.
 #   This will build all the package file to dist/ directory in the root
 npm run build
+
+# Run storybook in dev mode
+npm run storybook:dev
+
 ```
 
 ## Project structure
