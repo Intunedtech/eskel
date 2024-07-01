@@ -5,6 +5,13 @@ interface ExchangeRates {
     [key: string]: number;
 }
 
+const calculateRecieveAmount = (SendAmount:number , ExchangeRate:number): number => {
+    return Number( (SendAmount * ExchangeRate).toFixed(2) );
+}
+const calculateSendAmount = (ReceiveAmount:number , ExchangeRate:number): number => {
+    return Number( (ReceiveAmount / ExchangeRate).toFixed(2) );
+}
+
 const CurrencyConverter = () => {
     const [sendInputValue, setSendInputValue] = useState("");
     const [receiveInputValue, setReceiveInputValue] = useState("");
@@ -15,15 +22,19 @@ const CurrencyConverter = () => {
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = event.target;
-
+        
         switch (name) {
             case 'send':
                 console.log("handling send");
-                setSendInputValue(value);
-                setReceiveInputValue((Number(value) * Number(exchangeRate)).toFixed(2))
+                var sendAmount = value;
+                var receiveAmount = calculateRecieveAmount(+sendAmount, exchangeRate ? +exchangeRate:0)  as unknown as string;
+                setSendInputValue(sendAmount);
+                setReceiveInputValue(receiveAmount)
                 break;
             case 'recieve':
                 console.log("handling recieve");
+                var receiveAmount = value;
+                var sendAmount = calculateSendAmount(+receiveAmount, exchangeRate ? +exchangeRate:0)  as unknown as string;
                 setReceiveInputValue(value);
                 setSendInputValue((Number(value) / Number(exchangeRate)).toFixed(2))
                 break;
@@ -34,9 +45,10 @@ const CurrencyConverter = () => {
                     .then((data) => {
                         const rates: ExchangeRates = data.rates;
                         if (rates[value]) {
-
+                            var sendAmount = sendInputValue;
+                            var receiveAmount = calculateRecieveAmount(+sendAmount, rates[value] ? +rates[value]:0)  as unknown as string;
                             setExchangeRate(rates[value]);
-                            setReceiveInputValue((Number(sendInputValue) * rates[value]).toFixed(2))
+                            setReceiveInputValue(receiveAmount)
                         }
                     })
                     .catch((error) => console.error('Error fetching exchange rate:', error));
@@ -48,8 +60,10 @@ const CurrencyConverter = () => {
                     .then((data) => {
                         const rates: ExchangeRates = data.rates;
                         if (rates[targetCurrency]) {
+                            var sendAmount = sendInputValue;
+                            var receiveAmount = calculateRecieveAmount(+sendAmount, rates[targetCurrency] ? +rates[targetCurrency]:0)  as unknown as string;
                             setExchangeRate(rates[targetCurrency]);
-                            setReceiveInputValue((Number(sendInputValue) * rates[targetCurrency]).toFixed(2))
+                            setReceiveInputValue(receiveAmount)
                         }
                     })
               break;
