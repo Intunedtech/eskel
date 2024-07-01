@@ -6,16 +6,16 @@ interface ExchangeRates {
 }
 
 const calculateRecieveAmount = (SendAmount:number , ExchangeRate:number): number => {
-    return Number( (SendAmount * ExchangeRate).toFixed(2) );
+    return +( (SendAmount * ExchangeRate).toFixed(2) );
 }
 const calculateSendAmount = (ReceiveAmount:number , ExchangeRate:number): number => {
-    return Number( (ReceiveAmount / ExchangeRate).toFixed(2) );
+    return +( (ReceiveAmount / ExchangeRate).toFixed(2) );
 }
 
 const CurrencyConverter = () => {
     const [sendInputValue, setSendInputValue] = useState("");
     const [receiveInputValue, setReceiveInputValue] = useState("");
-    const [exchangeRate, setExchangeRate] = useState<Number>();
+    const [exchangeRate, setExchangeRate] = useState<number>(0);
     const [sendCurrency, setSendCurrency] = useState("AUD");
     const [targetCurrency, setTargetCurrency] = useState("NPR");
     const [countryNames, setCountryNames] = useState<string[]>([]);
@@ -27,14 +27,14 @@ const CurrencyConverter = () => {
             case 'send':
                 console.log("handling send");
                 var sendAmount = value;
-                var receiveAmount = calculateRecieveAmount(+sendAmount, exchangeRate ? +exchangeRate:0)  as unknown as string;
+                var receiveAmount = calculateRecieveAmount(+sendAmount, exchangeRate)  as unknown as string;
                 setSendInputValue(sendAmount);
                 setReceiveInputValue(receiveAmount)
                 break;
             case 'recieve':
                 console.log("handling recieve");
                 var receiveAmount = value;
-                var sendAmount = calculateSendAmount(+receiveAmount, exchangeRate ? +exchangeRate:0)  as unknown as string;
+                var sendAmount = calculateSendAmount(+receiveAmount, exchangeRate)  as unknown as string;
                 setReceiveInputValue(value);
                 setSendInputValue((Number(value) / Number(exchangeRate)).toFixed(2))
                 break;
@@ -46,7 +46,7 @@ const CurrencyConverter = () => {
                         const rates: ExchangeRates = data.rates;
                         if (rates[value]) {
                             var sendAmount = sendInputValue;
-                            var receiveAmount = calculateRecieveAmount(+sendAmount, rates[value] ? +rates[value]:0)  as unknown as string;
+                            var receiveAmount = calculateRecieveAmount(+sendAmount, rates[value])  as unknown as string;
                             setExchangeRate(rates[value]);
                             setReceiveInputValue(receiveAmount)
                         }
@@ -61,7 +61,7 @@ const CurrencyConverter = () => {
                         const rates: ExchangeRates = data.rates;
                         if (rates[targetCurrency]) {
                             var sendAmount = sendInputValue;
-                            var receiveAmount = calculateRecieveAmount(+sendAmount, rates[targetCurrency] ? +rates[targetCurrency]:0)  as unknown as string;
+                            var receiveAmount = calculateRecieveAmount(+sendAmount, rates[targetCurrency])  as unknown as string;
                             setExchangeRate(rates[targetCurrency]);
                             setReceiveInputValue(receiveAmount)
                         }
