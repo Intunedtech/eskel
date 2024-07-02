@@ -5,10 +5,10 @@ interface ExchangeRates {
     [key: string]: number;
 }
 
-const calculateRecieveAmount = (SendAmount:number , ExchangeRate:number): number => {
+export const calculateReceiveAmount = (SendAmount:number , ExchangeRate:number): number => {
     return +( (SendAmount * ExchangeRate).toFixed(2) );
 }
-const calculateSendAmount = (ReceiveAmount:number , ExchangeRate:number): number => {
+export const calculateSendAmount = (ReceiveAmount:number , ExchangeRate:number): number => {
     return +( (ReceiveAmount / ExchangeRate).toFixed(2) );
 }
 
@@ -27,7 +27,7 @@ const CurrencyConverter = () => {
             case 'send':
                 console.log("handling send");
                 var sendAmount = value;
-                var receiveAmount = calculateRecieveAmount(+sendAmount, exchangeRate)  as unknown as string;
+                var receiveAmount = calculateReceiveAmount(+sendAmount, exchangeRate)  as unknown as string;
                 setSendInputValue(sendAmount);
                 setReceiveInputValue(receiveAmount)
                 break;
@@ -46,7 +46,7 @@ const CurrencyConverter = () => {
                         const rates: ExchangeRates = data.rates;
                         if (rates[value]) {
                             var sendAmount = sendInputValue;
-                            var receiveAmount = calculateRecieveAmount(+sendAmount, rates[value])  as unknown as string;
+                            var receiveAmount = calculateReceiveAmount(+sendAmount, rates[value])  as unknown as string;
                             setExchangeRate(rates[value]);
                             setReceiveInputValue(receiveAmount)
                         }
@@ -61,7 +61,7 @@ const CurrencyConverter = () => {
                         const rates: ExchangeRates = data.rates;
                         if (rates[targetCurrency]) {
                             var sendAmount = sendInputValue;
-                            var receiveAmount = calculateRecieveAmount(+sendAmount, rates[targetCurrency])  as unknown as string;
+                            var receiveAmount = calculateReceiveAmount(+sendAmount, rates[targetCurrency])  as unknown as string;
                             setExchangeRate(rates[targetCurrency]);
                             setReceiveInputValue(receiveAmount)
                         }
